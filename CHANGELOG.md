@@ -1,5 +1,11 @@
 ### Changelog
 
+#### [0.1.4](https://github.com/plumdog/dirbuild/compare/0.1.3...0.1.4)
+
+> 18 May 2020
+
+- Use node runtime for bin.ts [`fd6a339`](https://github.com/plumdog/dirbuild/commit/fd6a339dbebdbbcff2023e8c69386805e49028a1)
+
 #### [0.1.3](https://github.com/plumdog/dirbuild/compare/0.1.2...0.1.3)
 
 > 18 May 2020
