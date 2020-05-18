@@ -1,0 +1,49 @@
+{
+  "name": "dirbuild",
+  "version": "0.0.0",
+  "description": "",
+  "bin": "bin.js",
+  "engines": {
+    "node": ">=12.13.0 <13",
+    "npm": ">=6.11.0 <7"
+  },
+  "scripts": {
+    "build": "rm -rf build/ && npm run -- tsc --noEmitOnError --outDir ./build && cp package.json package-lock.json README.md ./build/ && (cd ./build && npm ci --only=production)",
+    "package": "npm run build && mkdir -p dist && npx pkg ./build --out-path ./dist",
+    "compile": "npm run tsc --noEmitOnError",
+    "test": "jest",
+    "eslint": "eslint",
+    "lint": "eslint '**/*.ts' --quiet --fix",
+    "lint-check": "eslint '**/*.ts' --max-warnings 0",
+    "tsc": "tsc"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/deep-equal": "1.0.1",
+    "@types/glob": "7.1.1",
+    "@types/jest": "25.2.1",
+    "@types/js-yaml": "3.12.4",
+    "@types/node": "10.17.5",
+    "@typescript-eslint/eslint-plugin": "2.16.0",
+    "@typescript-eslint/parser": "2.16.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.9.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "jest": "25.5.4",
+    "pkg": "4.4.8",
+    "prettier": "1.19.1",
+    "ts-jest": "25.5.0",
+    "ts-node": "8.1.0",
+    "typescript": "3.8.3"
+  },
+  "dependencies": {
+    "deep-equal": "^2.0.3",
+    "fp-ts": "^2.5.3",
+    "glob": "^7.1.6",
+    "io-ts": "^2.1.2",
+    "js-yaml": "^3.13.1",
+    "md5-file": "^5.0.0",
+    "winston": "^3.2.1"
+  }
+}
