@@ -1,5 +1,11 @@
 ### Changelog
 
+#### [0.1.2](https://github.com/plumdog/dirbuild/compare/0.1.1...0.1.2)
+
+> 18 May 2020
+
+- Publish from tags (not Github releases) to NPM [`744d36f`](https://github.com/plumdog/dirbuild/commit/744d36f4e7d09e34128d6a0b5e44dd6cc9369beb)
+
 #### [0.1.1](https://github.com/plumdog/dirbuild/compare/0.1.0...0.1.1)
 
 > 18 May 2020
