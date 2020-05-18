@@ -1,5 +1,11 @@
 ### Changelog
 
+#### [0.1.3](https://github.com/plumdog/dirbuild/compare/0.1.2...0.1.3)
+
+> 18 May 2020
+
+- Fix publish workflow [`4e9ac59`](https://github.com/plumdog/dirbuild/commit/4e9ac598bb5103e6ee0d6c9bef7b0de146770248)
+
 #### [0.1.2](https://github.com/plumdog/dirbuild/compare/0.1.1...0.1.2)
 
 > 18 May 2020
