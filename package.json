@@ -11,6 +11,7 @@
     "build": "rm -rf build/ && npm run -- tsc --noEmitOnError --outDir ./build && cp package.json package-lock.json README.md ./build/ && (cd ./build && npm ci --only=production)",
     "package": "npm run build && mkdir -p dist && npx pkg ./build --out-path ./dist",
     "compile": "npm run tsc --noEmitOnError",
+    "version": "auto-changelog --template ./changelog_template.hbs -p && git add CHANGELOG.md",
     "test": "jest",
     "eslint": "eslint",
     "lint": "eslint '**/*.ts' --quiet --fix",
