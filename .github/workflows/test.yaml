@@ -1,3 +1,5 @@
+name: "Run linting and tests"
+
 on: [push, pull_request]
 
 jobs:
