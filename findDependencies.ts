@@ -16,7 +16,9 @@ export const resolveDependencies = async (dirpath: string, dependencies: Array<s
     return Promise.all(
         dependencies.map(
             (dependency: string): Promise<Array<string>> => {
-                return globPromise(dependency);
+                return globPromise(dependency, {
+                    cwd: dirpath,
+                });
             },
         ),
     )
