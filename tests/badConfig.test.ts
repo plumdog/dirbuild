@@ -27,7 +27,7 @@ describe('badConfig', () => {
     test('errors if config file is not parseable', async () => {
         fs.writeFileSync(path.join(tmpDir, '.dirbuild.yml'), 'this is not valid yaml { :');
 
-        await expect(run(tmpDir, undefined)).rejects.toThrow('Invalid config');
+        await expect(run(tmpDir, {})).rejects.toThrow('Invalid config');
     });
 
     test('repeated run does not rerun command', async () => {
@@ -38,7 +38,7 @@ describe('badConfig', () => {
             }),
         );
 
-        await expect(run(tmpDir, undefined)).rejects.toThrow('Invalid config');
+        await expect(run(tmpDir, {})).rejects.toThrow('Invalid config');
     });
 
     test('no targets, run default', async () => {
@@ -50,7 +50,7 @@ describe('badConfig', () => {
             }),
         );
 
-        await expect(run(tmpDir, undefined)).rejects.toThrow('No targets to default to');
+        await expect(run(tmpDir, {})).rejects.toThrow('No targets to default to');
     });
 
     test('no targets, run selected', async () => {
@@ -62,6 +62,10 @@ describe('badConfig', () => {
             }),
         );
 
-        await expect(run(tmpDir, 'nosuchtarget')).rejects.toThrow('Unknown target: nosuchtarget');
+        await expect(
+            run(tmpDir, {
+                targetName: 'nosuchtarget',
+            }),
+        ).rejects.toThrow('Unknown target: nosuchtarget');
     });
 });

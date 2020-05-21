@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import * as yaml from 'js-yaml';
+import { MANIFEST_FILENAME } from './constants';
 import { DependencyHashes } from './hashDependencies';
 
 const fsPromises = fs.promises;
@@ -19,5 +20,5 @@ export const writeManifest = async (dirpath: string, targetOutput: string, depen
     const yamlManifest = yaml.safeDump({
         dependencies: hashesToRecord(dependencyHashes),
     });
-    await fsPromises.writeFile(path.join(dirpath, targetOutput, '.dirbuildManifest.yml'), yamlManifest);
+    await fsPromises.writeFile(path.join(dirpath, targetOutput, MANIFEST_FILENAME), yamlManifest);
 };
