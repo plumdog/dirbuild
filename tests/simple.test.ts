@@ -51,6 +51,16 @@ describe('simple', () => {
         expect(filedata).toEqual('file1file2');
     });
 
+    test('runs command from selected target', async () => {
+        // Name the target
+        await run(tmpDir, 'build');
+
+        const outputFilepath = path.join(tmpDir, 'build/output.txt');
+        const filedata = await fsPromises.readFile(outputFilepath, 'utf8');
+
+        expect(filedata).toEqual('file1file2');
+    });
+
     test('repeated run does not rerun command', async () => {
         await run(tmpDir, undefined);
         const outputFilepath = path.join(tmpDir, 'build/output.txt');
