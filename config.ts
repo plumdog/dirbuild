@@ -7,6 +7,7 @@ const fsPromises = fs.promises;
 
 const Target = t.type({
     depends: t.array(t.string),
+    dependsExclude: t.union([t.array(t.string), t.undefined]),
     output: t.string,
     command: t.string,
 });
