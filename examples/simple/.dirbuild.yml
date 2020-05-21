@@ -1,6 +1,6 @@
 targets:
   build:
     depends:
-      - input1.txt
+      - '*.txt'
     output: build/
     command: rm -rf build/ && mkdir build && cat input1.txt input2.txt > build/output.txt
