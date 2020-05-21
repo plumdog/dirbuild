@@ -12,12 +12,13 @@ const sortedAndUnique = <T>(array: Array<T>): Array<T> => {
     return unique.sort();
 };
 
-export const resolveDependencies = async (dirpath: string, dependencies: Array<string>): Promise<Array<string>> => {
+export const resolveDependencies = async (dirpath: string, dependencies: Array<string>, dependenciesExclude: Array<string>): Promise<Array<string>> => {
     return Promise.all(
         dependencies.map(
             (dependency: string): Promise<Array<string>> => {
                 return globPromise(dependency, {
                     cwd: dirpath,
+                    ignore: dependenciesExclude,
                 });
             },
         ),

@@ -12,7 +12,7 @@ import { writeManifest } from './writeManifest';
 const execPromise = util.promisify(childProcess.exec);
 
 const runTarget = async (dirpath: string, target: Target): Promise<void> => {
-    const dependsOnFiles = await resolveDependencies(dirpath, target.depends);
+    const dependsOnFiles = await resolveDependencies(dirpath, target.depends, target.dependsExclude || []);
     // console.log('depends', JSON.stringify(dependsOnFiles, null, 2));
     const hashes = await hashDependencies(dirpath, dependsOnFiles);
     // console.log('hashes', JSON.stringify(hashes, null, 2));
