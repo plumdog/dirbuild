@@ -14,7 +14,7 @@
     "version": "auto-changelog --template ./changelog_template.hbs -p && git add CHANGELOG.md",
     "test": "jest",
     "eslint": "eslint",
-    "lint": "eslint '**/*.ts' --quiet --fix",
+    "lint": "eslint '**/*.ts' --fix",
     "lint-check": "eslint '**/*.ts' --max-warnings 0",
     "tsc": "tsc"
   },
