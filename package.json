@@ -8,7 +8,7 @@
     "npm": ">=6.11.0 <7"
   },
   "scripts": {
-    "build": "rm -rf build/ && npm run -- tsc --noEmitOnError --outDir ./build && cp package.json package-lock.json README.md ./build/ && (cd ./build && npm ci --only=production)",
+    "build": "rm -rf build/ && npm run -- tsc --project ./tsconfig.dist.json --noEmitOnError --outDir ./build && cp package.json package-lock.json README.md ./build/ && (cd ./build && npm ci --only=production)",
     "package": "npm run build && mkdir -p dist && npx pkg ./build --out-path ./dist",
     "compile": "npm run tsc --noEmitOnError",
     "version": "auto-changelog --template ./changelog_template.hbs -p && git add CHANGELOG.md",
