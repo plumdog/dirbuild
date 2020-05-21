@@ -1,5 +1,16 @@
 ### Changelog
 
+#### [0.3.0](https://github.com/plumdog/dirbuild/compare/0.2.0...0.3.0)
+
+> 21 May 2020
+
+- Tweak usage of pkg [`#19`](https://github.com/plumdog/dirbuild/pull/19)
+- Complain when applying linting [`#18`](https://github.com/plumdog/dirbuild/pull/18)
+- Better example [`#12`](https://github.com/plumdog/dirbuild/pull/12)
+- Better console output [`#17`](https://github.com/plumdog/dirbuild/pull/17)
+- Refactor [`#14`](https://github.com/plumdog/dirbuild/pull/14)
+- Improve README [`#11`](https://github.com/plumdog/dirbuild/pull/11)
+
 #### [0.2.0](https://github.com/plumdog/dirbuild/compare/0.1.4...0.2.0)
 
 > 21 May 2020
