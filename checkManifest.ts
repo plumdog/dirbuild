@@ -31,22 +31,45 @@ export const dependenciesMatch = (fromManifest: DependenciesForManifest, forMani
     return true;
 };
 
-export const checkManifest = async (dirpath: string, targetOutput: string, dependencyHashes: DependencyHashes): Promise<boolean> => {
+interface ManifestCheckNeedsUpdate {
+    needsUpdate: true;
+    reason: string;
+}
+
+interface ManifestCheckNothingToDo {
+    needsUpdate: false;
+}
+
+export type ManifestCheck = ManifestCheckNeedsUpdate | ManifestCheckNothingToDo;
+
+export const checkManifest = async (dirpath: string, targetOutput: string, dependencyHashes: DependencyHashes): Promise<ManifestCheck> => {
     let rawManifest;
     try {
         rawManifest = await fsPromises.readFile(path.join(dirpath, targetOutput, '.dirbuildManifest.yml'), 'utf8');
     } catch (err) {
-        console.log('No manifest, return false');
-        // Unable to read existing manifest
-        return false;
+        return {
+            needsUpdate: true,
+            reason: 'No manifest',
+        };
     }
     const manifestYaml: unknown = yaml.safeLoad(rawManifest);
     const isManifest = Manifest.decode(manifestYaml);
     if (isLeft(isManifest)) {
-        return false;
+        return {
+            needsUpdate: true,
+            reason: 'Manifest file found, but unable to parse',
+        };
     }
     const manifest = isManifest.right;
     const areEqual = dependenciesMatch(manifest.dependencies, hashesToRecord(dependencyHashes));
-    console.log('areEqual', areEqual);
-    return areEqual;
+    if (!areEqual) {
+        return {
+            needsUpdate: true,
+            reason: 'Calculated hashes do not match with existing manifest',
+        };
+    }
+
+    return {
+        needsUpdate: false,
+    };
 };
