@@ -15,25 +15,32 @@ const execPromise = util.promisify(childProcess.exec);
 const runTarget = async (context: Context, target: Target): Promise<void> => {
     const dirpath = context.dirpath;
     const dependsOnFiles = await resolveDependencies(dirpath, target.depends, target.dependsExclude || []);
-    // console.log('depends', JSON.stringify(dependsOnFiles, null, 2));
     const hashes = await hashDependencies(dirpath, dependsOnFiles);
-    // console.log('hashes', JSON.stringify(hashes, null, 2));
 
-    if (await checkManifest(dirpath, target.output, hashes)) {
-        console.log('Hashes match, nothing to do');
+    const manifestCheck = await checkManifest(dirpath, target.output, hashes);
+    if (!manifestCheck.needsUpdate) {
+        context.log.info('Hashes match, nothing to do');
         return;
     }
 
-    console.log('Hashes do not match, need to rebuild');
+    context.log.debug(manifestCheck.reason);
+    context.log.info('Need to rebuild...');
 
     const { stdout, stderr } = await execPromise(target.command, {
         shell: '/bin/bash',
         cwd: dirpath,
     });
-    console.log(stdout);
-    console.error(stderr);
+    if (stdout) {
+        context.log.info(stdout);
+    }
+    if (stderr) {
+        context.log.error(stderr);
+    }
+    context.log.info('Rebuild done');
 
+    context.log.debug('Writing manifest...');
     await writeManifest(dirpath, target.output, hashes);
+    context.log.debug('Writing manifest done');
 };
 
 export const run = async (dirpath: string, options: Partial<Options>): Promise<void> => {
