@@ -5,8 +5,10 @@ import { DependencyHashes } from './hashDependencies';
 
 const fsPromises = fs.promises;
 
-export const hashesToRecord = (dependencyHashes: DependencyHashes): Record<string, string> => {
-    const hashesRecord: Record<string, string> = {};
+export type DependenciesForManifest = Record<string, string>;
+
+export const hashesToRecord = (dependencyHashes: DependencyHashes): DependenciesForManifest => {
+    const hashesRecord: DependenciesForManifest = {};
     for (const hash of dependencyHashes) {
         hashesRecord[hash.dependencyPath] = hash.hash;
     }

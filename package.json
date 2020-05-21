@@ -21,7 +21,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/deep-equal": "1.0.1",
     "@types/glob": "7.1.1",
     "@types/jest": "25.2.1",
     "@types/js-yaml": "3.12.4",
@@ -42,7 +41,6 @@
     "typescript": "3.8.3"
   },
   "dependencies": {
-    "deep-equal": "^2.0.3",
     "fp-ts": "^2.5.3",
     "glob": "^7.1.6",
     "io-ts": "^2.1.2",
