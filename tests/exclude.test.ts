@@ -41,7 +41,7 @@ describe('simple', () => {
     });
 
     test('changing excluded file does not result in command rerun', async () => {
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const outputFilepath = path.join(tmpDir, 'build/output.txt');
 
         const outputFileStatRun1 = await fsPromises.lstat(outputFilepath);
@@ -49,7 +49,7 @@ describe('simple', () => {
         // Change an excluded
         await fsPromises.writeFile(path.join(tmpDir, 'file2.txt'), 'changed file content');
 
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
 
         const outputFileStatRun2 = await fsPromises.lstat(outputFilepath);
 
@@ -58,7 +58,7 @@ describe('simple', () => {
     });
 
     test('changing non excluded file does result in command rerun', async () => {
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const outputFilepath = path.join(tmpDir, 'build/output.txt');
 
         const outputFileStatRun1 = await fsPromises.lstat(outputFilepath);
@@ -66,7 +66,7 @@ describe('simple', () => {
         // Change a non excluded source file
         await fsPromises.writeFile(path.join(tmpDir, 'file1.txt'), 'changed file content');
 
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
 
         const outputFileStatRun2 = await fsPromises.lstat(outputFilepath);
 

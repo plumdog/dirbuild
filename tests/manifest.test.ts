@@ -32,7 +32,7 @@ describe('manifest', () => {
         await fsPromises.writeFile(path.join(tmpDir, 'file2.txt'), 'file2');
 
         // Run it once at the start so we have a manifest to play with
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
     });
 
     afterEach(() => {
@@ -45,7 +45,7 @@ describe('manifest', () => {
         await fsPromises.writeFile(path.join(tmpDir, './build/.dirbuildManifest.yml'), 'this is not a valid file');
 
         const initialMtime = (await fsPromises.lstat(path.join(tmpDir, './build/output.txt'))).mtime;
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const afterMtime = (await fsPromises.lstat(path.join(tmpDir, './build/output.txt'))).mtime;
         // Should have rerun the command
         expect(initialMtime).not.toEqual(afterMtime);
@@ -55,7 +55,7 @@ describe('manifest', () => {
         await fsPromises.unlink(path.join(tmpDir, './build/.dirbuildManifest.yml'));
 
         const initialMtime = (await fsPromises.lstat(path.join(tmpDir, './build/output.txt'))).mtime;
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const afterMtime = (await fsPromises.lstat(path.join(tmpDir, './build/output.txt'))).mtime;
         // Should have rerun the command
         expect(initialMtime).not.toEqual(afterMtime);
@@ -80,7 +80,7 @@ describe('manifest', () => {
         await fsPromises.writeFile(manifestPath, yaml.safeDump(manifest));
 
         const initialMtime = (await fsPromises.lstat(path.join(tmpDir, './build/output.txt'))).mtime;
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const afterMtime = (await fsPromises.lstat(path.join(tmpDir, './build/output.txt'))).mtime;
         // Should have rerun the command
         expect(initialMtime).not.toEqual(afterMtime);
@@ -94,7 +94,7 @@ describe('manifest', () => {
         await fsPromises.writeFile(manifestPath, yaml.safeDump(manifest));
 
         const initialMtime = (await fsPromises.lstat(path.join(tmpDir, './build/output.txt'))).mtime;
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const afterMtime = (await fsPromises.lstat(path.join(tmpDir, './build/output.txt'))).mtime;
         // Should have rerun the command
         expect(initialMtime).not.toEqual(afterMtime);

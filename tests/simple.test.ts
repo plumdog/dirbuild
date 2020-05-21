@@ -43,7 +43,7 @@ describe('simple', () => {
     });
 
     test('runs command', async () => {
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
 
         const outputFilepath = path.join(tmpDir, 'build/output.txt');
         const filedata = await fsPromises.readFile(outputFilepath, 'utf8');
@@ -53,7 +53,9 @@ describe('simple', () => {
 
     test('runs command from selected target', async () => {
         // Name the target
-        await run(tmpDir, 'build');
+        await run(tmpDir, {
+            targetName: 'build',
+        });
 
         const outputFilepath = path.join(tmpDir, 'build/output.txt');
         const filedata = await fsPromises.readFile(outputFilepath, 'utf8');
@@ -62,18 +64,18 @@ describe('simple', () => {
     });
 
     test('repeated run does not rerun command', async () => {
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const outputFilepath = path.join(tmpDir, 'build/output.txt');
 
         const outputFileStatRun1 = await fsPromises.lstat(outputFilepath);
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const outputFileStatRun2 = await fsPromises.lstat(outputFilepath);
         // The modification file for the file should not have changed
         expect(outputFileStatRun1.mtime).toEqual(outputFileStatRun2.mtime);
     });
 
     test('repeated run does rerun command if a source file has changed', async () => {
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
         const outputFilepath = path.join(tmpDir, 'build/output.txt');
 
         const outputFileStatRun1 = await fsPromises.lstat(outputFilepath);
@@ -81,7 +83,7 @@ describe('simple', () => {
         // Change a source file
         await fsPromises.writeFile(path.join(tmpDir, 'file1.txt'), 'changed file content');
 
-        await run(tmpDir, undefined);
+        await run(tmpDir, {});
 
         const outputFileStatRun2 = await fsPromises.lstat(outputFilepath);
 

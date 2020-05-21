@@ -1,4 +1,3 @@
-import * as path from 'path';
 import * as util from 'util';
 import * as childProcess from 'child_process';
 
@@ -8,10 +7,13 @@ import { resolveDependencies } from './findDependencies';
 import { hashDependencies } from './hashDependencies';
 import { checkManifest } from './checkManifest';
 import { writeManifest } from './writeManifest';
+import { getOptions, Options } from './options';
+import { getContext, Context } from './context';
 
 const execPromise = util.promisify(childProcess.exec);
 
-const runTarget = async (dirpath: string, target: Target): Promise<void> => {
+const runTarget = async (context: Context, target: Target): Promise<void> => {
+    const dirpath = context.dirpath;
     const dependsOnFiles = await resolveDependencies(dirpath, target.depends, target.dependsExclude || []);
     // console.log('depends', JSON.stringify(dependsOnFiles, null, 2));
     const hashes = await hashDependencies(dirpath, dependsOnFiles);
@@ -34,9 +36,11 @@ const runTarget = async (dirpath: string, target: Target): Promise<void> => {
     await writeManifest(dirpath, target.output, hashes);
 };
 
-export const run = async (dirpath: string, targetName: string | undefined): Promise<void> => {
-    const configPath = path.join(dirpath, '.dirbuild.yml');
-    const config = await loadConfig(configPath);
-    const target = getTarget(config, targetName);
-    await runTarget(dirpath, target);
+export const run = async (dirpath: string, options: Partial<Options>): Promise<void> => {
+    const opts = getOptions(options);
+    const context = getContext(dirpath, opts);
+
+    const config = await loadConfig(context);
+    const target = getTarget(context, config);
+    await runTarget(context, target);
 };

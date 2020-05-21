@@ -1,7 +1,10 @@
 import * as fs from 'fs';
+import * as path from 'path';
 import * as yaml from 'js-yaml';
 import * as t from 'io-ts';
+import { CONFIG_FILENAME } from './constants';
 import { isLeft } from 'fp-ts/lib/Either';
+import { Context } from './context';
 
 const fsPromises = fs.promises;
 
@@ -20,7 +23,8 @@ const Config = t.type({
 
 type Config = t.TypeOf<typeof Config>;
 
-export const getTarget = (config: Config, targetName: string | undefined): Target => {
+export const getTarget = (context: Context, config: Config): Target => {
+    const targetName = context.options.targetName;
     if (typeof targetName === 'undefined') {
         const firstTarget = Object.values(config.targets)[0];
         if (typeof firstTarget === 'undefined') {
@@ -35,7 +39,8 @@ export const getTarget = (config: Config, targetName: string | undefined): Targe
     return selectedTarget;
 };
 
-export const loadConfig = async (configPath: string): Promise<Config> => {
+export const loadConfig = async (context: Context): Promise<Config> => {
+    const configPath = path.join(context.dirpath, CONFIG_FILENAME);
     const rawConfig = await fsPromises.readFile(configPath, 'utf8');
     const unvalidatedConfig = yaml.safeLoad(rawConfig);
     const isConfig = Config.decode(unvalidatedConfig);
