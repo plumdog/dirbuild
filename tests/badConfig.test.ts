@@ -27,10 +27,7 @@ describe('badConfig', () => {
     });
 
     test('errors if config file is not parseable', async () => {
-        fs.writeFileSync(
-            path.join(tmpDir, '.dirbuild.yml'),
-            'this is not valid yaml { :'
-        );
+        fs.writeFileSync(path.join(tmpDir, '.dirbuild.yml'), 'this is not valid yaml { :');
 
         await expect(run(tmpDir, undefined)).rejects.toThrow('Invalid config');
     });
