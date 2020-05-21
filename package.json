@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "rm -rf build/ && npm run -- tsc --project ./tsconfig.dist.json --noEmitOnError --outDir ./build && cp package.json package-lock.json README.md ./build/ && (cd ./build && npm ci --only=production)",
-    "package": "npm run build && mkdir -p dist && npx pkg ./build --out-path ./dist",
+    "package": "npm run build && rm -rf dist/ && mkdir -p dist && npm run -- pkg ./build --out-path ./dist",
+    "pkg": "pkg",
     "compile": "npm run tsc --noEmitOnError",
     "version": "auto-changelog --template ./changelog_template.hbs -p && git add CHANGELOG.md",
     "test": "jest",
