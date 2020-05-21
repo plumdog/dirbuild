@@ -5,8 +5,6 @@ import tmp from 'tmp';
 
 import { run } from '../main';
 
-const fsPromises = fs.promises;
-
 describe('badConfig', () => {
     let tmpObj: tmp.DirResult;
     let tmpDir: string;
