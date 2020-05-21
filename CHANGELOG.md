@@ -1,5 +1,17 @@
 ### Changelog
 
+#### [0.2.0](https://github.com/plumdog/dirbuild/compare/0.1.4...0.2.0)
+
+> 21 May 2020
+
+- Reduce dependencies [`#10`](https://github.com/plumdog/dirbuild/pull/10)
+- Excludes [`#9`](https://github.com/plumdog/dirbuild/pull/9)
+- More test coverage [`#8`](https://github.com/plumdog/dirbuild/pull/8)
+- Tests [`#7`](https://github.com/plumdog/dirbuild/pull/7)
+- Split into separate files [`e9c24f5`](https://github.com/plumdog/dirbuild/commit/e9c24f5292c0e80045c3405ddf3e5971f818d558)
+- Prettier linting rules [`35ce067`](https://github.com/plumdog/dirbuild/commit/35ce067b3030d4ba761d7961d2733c0d212dd05c)
+- Upload executables to the Github release [`81b93f7`](https://github.com/plumdog/dirbuild/commit/81b93f7f6b45d0ea4b42af05cd26b86a9b164a01)
+
 #### [0.1.4](https://github.com/plumdog/dirbuild/compare/0.1.3...0.1.4)
 
 > 18 May 2020
