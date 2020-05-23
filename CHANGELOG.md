@@ -1,5 +1,12 @@
 ### Changelog
 
+#### [0.4.0](https://github.com/plumdog/dirbuild/compare/0.3.0...0.4.0)
+
+> 23 May 2020
+
+- Command line argument parsing [`#21`](https://github.com/plumdog/dirbuild/pull/21)
+- Stream exec output [`#20`](https://github.com/plumdog/dirbuild/pull/20)
+
 #### [0.3.0](https://github.com/plumdog/dirbuild/compare/0.2.0...0.3.0)
 
 > 21 May 2020
