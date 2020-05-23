@@ -1,15 +1,6 @@
 #!/usr/bin/env node
 
-import { run } from './main';
-
-const main = async (args: Array<string>): Promise<void> => {
-    if (args.length > 1) {
-        process.exit(1);
-    }
-    await run(process.cwd(), {
-        targetName: args[0],
-    });
-};
+import { main } from './main';
 
 main(process.argv.slice(2))
     .then(() => {
