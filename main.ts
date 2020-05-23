@@ -1,4 +1,4 @@
-import * as util from 'util';
+import { Writable } from 'stream';
 import * as childProcess from 'child_process';
 
 import { Target, getTarget, loadConfig } from './config';
@@ -10,7 +10,33 @@ import { writeManifest } from './writeManifest';
 import { getOptions, Options } from './options';
 import { getContext, Context } from './context';
 
-const execPromise = util.promisify(childProcess.exec);
+class StdoutWritable extends Writable {
+    _write(chunk: Buffer, encoding: BufferEncoding, callback: (error?: Error | null) => void): void {
+        process.stdout.write(chunk.toString());
+        callback();
+    }
+}
+
+class StderrWritable extends Writable {
+    _write(chunk: Buffer, encoding: BufferEncoding, callback: (error?: Error | null) => void): void {
+        process.stderr.write(chunk.toString());
+        callback();
+    }
+}
+
+const execPromisePipeIO = (command: string, options: childProcess.ExecOptions): Promise<void> => {
+    return new Promise((res, rej) => {
+        const process = childProcess.exec(command, options, (error: childProcess.ExecException | null): void => {
+            if (error) {
+                rej(error);
+            } else {
+                res();
+            }
+        });
+        process.stdout.pipe(new StdoutWritable());
+        process.stderr.pipe(new StderrWritable());
+    });
+};
 
 const runTarget = async (context: Context, target: Target): Promise<void> => {
     const dirpath = context.dirpath;
@@ -24,19 +50,22 @@ const runTarget = async (context: Context, target: Target): Promise<void> => {
     }
 
     context.log.debug(manifestCheck.reason);
-    context.log.info('Need to rebuild...');
+    context.log.info('Need to rerun command ...');
 
-    const { stdout, stderr } = await execPromise(target.command, {
-        shell: '/bin/bash',
-        cwd: dirpath,
-    });
-    if (stdout) {
-        context.log.info(stdout);
+    context.log.info(`Running command: ${target.command}`);
+    context.log.info('---');
+    try {
+        await execPromisePipeIO(target.command, {
+            shell: '/bin/bash',
+            cwd: dirpath,
+        });
+    } catch (err) {
+        context.log.info('---');
+        context.log.error('Error running command');
+        throw new Error('Error running command');
     }
-    if (stderr) {
-        context.log.error(stderr);
-    }
-    context.log.info('Rebuild done');
+    context.log.info('---');
+    context.log.info('Command exited successfully');
 
     context.log.debug('Writing manifest...');
     await writeManifest(dirpath, target.output, hashes);
