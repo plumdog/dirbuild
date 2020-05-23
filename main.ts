@@ -9,6 +9,7 @@ import { checkManifest } from './checkManifest';
 import { writeManifest } from './writeManifest';
 import { getOptions, Options } from './options';
 import { getContext, Context } from './context';
+import yargs from 'yargs';
 
 class StdoutWritable extends Writable {
     _write(chunk: Buffer, encoding: BufferEncoding, callback: (error?: Error | null) => void): void {
@@ -79,4 +80,33 @@ export const run = async (dirpath: string, options: Partial<Options>): Promise<v
     const config = await loadConfig(context);
     const target = getTarget(context, config);
     await runTarget(context, target);
+};
+
+export const main = async (args: Array<string>): Promise<void> => {
+    const parsedArgs = yargs
+        .boolean('verbose')
+        .describe('verbose', 'Be verbose')
+        .boolean('silent')
+        .describe('silent', 'Be silent')
+        .conflicts('--verbose', '--silent')
+        .usage('Usage: $0 [target] [...options]')
+        .strict()
+        .fail((msg: string, err: Error | null, yargs: yargs.Argv): void => {
+            /* istanbul ignore next */
+            if (err) throw err;
+            console.error(yargs.help());
+            throw new Error(msg);
+        })
+        .parse(args);
+
+    const positionalArgs: Array<string> = parsedArgs._;
+
+    if (positionalArgs.length > 1) {
+        throw new Error('Too many positional arguments');
+    }
+    await run(process.cwd(), {
+        targetName: positionalArgs[0],
+        verbose: !!parsedArgs.verbose,
+        silent: !!parsedArgs.silent,
+    });
 };
