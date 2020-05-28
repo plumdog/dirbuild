@@ -5,6 +5,7 @@ import * as t from 'io-ts';
 import { CONFIG_FILENAME } from './constants';
 import { isLeft } from 'fp-ts/lib/Either';
 import { Context } from './context';
+import { ConfigError } from './errors';
 
 const fsPromises = fs.promises;
 
@@ -28,13 +29,13 @@ export const getTarget = (context: Context, config: Config): Target => {
     if (typeof targetName === 'undefined') {
         const firstTarget = Object.values(config.targets)[0];
         if (typeof firstTarget === 'undefined') {
-            throw new Error('No targets to default to');
+            throw new ConfigError('No targets to default to');
         }
         return firstTarget;
     }
     const selectedTarget = config.targets[targetName];
     if (typeof selectedTarget === 'undefined') {
-        throw new Error(`Unknown target: ${targetName}`);
+        throw new ConfigError(`Unknown target: ${targetName}`);
     }
     return selectedTarget;
 };
@@ -45,7 +46,7 @@ export const loadConfig = async (context: Context): Promise<Config> => {
     const unvalidatedConfig = yaml.safeLoad(rawConfig);
     const isConfig = Config.decode(unvalidatedConfig);
     if (isLeft(isConfig)) {
-        throw new Error('Invalid config');
+        throw new ConfigError('Invalid config');
     }
     return isConfig.right;
 };

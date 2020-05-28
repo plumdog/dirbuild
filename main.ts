@@ -9,6 +9,7 @@ import { checkManifest } from './checkManifest';
 import { writeManifest } from './writeManifest';
 import { getOptions, Options } from './options';
 import { getContext, Context } from './context';
+import { ArgumentsError, CommandError } from './errors';
 import yargs from 'yargs';
 
 class StdoutWritable extends Writable {
@@ -63,7 +64,7 @@ const runTarget = async (context: Context, target: Target): Promise<void> => {
     } catch (err) {
         context.log.info('---');
         context.log.error('Error running command');
-        throw new Error('Error running command');
+        throw new CommandError('Error running command');
     }
     context.log.info('---');
     context.log.info('Command exited successfully');
@@ -102,7 +103,7 @@ export const main = async (args: Array<string>): Promise<void> => {
     const positionalArgs: Array<string> = parsedArgs._;
 
     if (positionalArgs.length > 1) {
-        throw new Error('Too many positional arguments');
+        throw new ArgumentsError('Too many positional arguments');
     }
     await run(process.cwd(), {
         targetName: positionalArgs[0],
