@@ -1,5 +1,11 @@
 ### Changelog
 
+#### [0.5.0](https://github.com/plumdog/dirbuild/compare/0.4.0...0.5.0)
+
+> 28 May 2020
+
+- Tidier error handling [`#23`](https://github.com/plumdog/dirbuild/pull/23)
+
 #### [0.4.0](https://github.com/plumdog/dirbuild/compare/0.3.0...0.4.0)
 
 > 23 May 2020
