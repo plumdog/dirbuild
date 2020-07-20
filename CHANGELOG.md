@@ -1,5 +1,11 @@
 ### Changelog
 
+#### [0.5.1](https://github.com/plumdog/dirbuild/compare/0.5.0...0.5.1)
+
+> 20 July 2020
+
+- Bump lodash from 4.17.15 to 4.17.19 [`#24`](https://github.com/plumdog/dirbuild/pull/24)
+
 #### [0.5.0](https://github.com/plumdog/dirbuild/compare/0.4.0...0.5.0)
 
 > 28 May 2020
