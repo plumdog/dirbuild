@@ -1,5 +1,11 @@
 ### Changelog
 
+#### [0.5.2](https://github.com/plumdog/dirbuild/compare/0.5.1...0.5.2)
+
+> 14 September 2020
+
+- Bump node-fetch from 2.6.0 to 2.6.1 [`#25`](https://github.com/plumdog/dirbuild/pull/25)
+
 #### [0.5.1](https://github.com/plumdog/dirbuild/compare/0.5.0...0.5.1)
 
 > 20 July 2020
