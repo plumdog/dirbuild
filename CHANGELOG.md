@@ -1,5 +1,11 @@
 ### Changelog
 
+#### [0.5.3](https://github.com/plumdog/dirbuild/compare/0.5.2...0.5.3)
+
+> 26 January 2021
+
+- Update jest dependencies [`#26`](https://github.com/plumdog/dirbuild/pull/26)
+
 #### [0.5.2](https://github.com/plumdog/dirbuild/compare/0.5.1...0.5.2)
 
 > 14 September 2020
