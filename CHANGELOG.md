@@ -1,5 +1,11 @@
 ### Changelog
 
+#### [0.5.4](https://github.com/plumdog/dirbuild/compare/0.5.3...0.5.4)
+
+> 1 April 2021
+
+- Bump y18n from 4.0.0 to 4.0.1 [`#27`](https://github.com/plumdog/dirbuild/pull/27)
+
 #### [0.5.3](https://github.com/plumdog/dirbuild/compare/0.5.2...0.5.3)
 
 > 26 January 2021
