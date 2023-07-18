@@ -1,5 +1,26 @@
 ### Changelog
 
+#### [0.5.5](https://github.com/plumdog/dirbuild/compare/0.5.4...0.5.5)
+
+- Bump tough-cookie and pkg [`#46`](https://github.com/plumdog/dirbuild/pull/46)
+- Bump minimatch from 3.0.4 to 3.1.2 [`#43`](https://github.com/plumdog/dirbuild/pull/43)
+- Bump json-schema and jsprim [`#44`](https://github.com/plumdog/dirbuild/pull/44)
+- Bump decode-uri-component from 0.2.0 to 0.2.2 [`#40`](https://github.com/plumdog/dirbuild/pull/40)
+- Bump jsdom from 16.4.0 to 16.7.0 [`#39`](https://github.com/plumdog/dirbuild/pull/39)
+- Bump qs from 6.5.2 to 6.5.3 [`#41`](https://github.com/plumdog/dirbuild/pull/41)
+- Bump json5 from 2.1.3 to 2.2.3 [`#42`](https://github.com/plumdog/dirbuild/pull/42)
+- Bump node-fetch from 2.6.1 to 2.6.7 [`#38`](https://github.com/plumdog/dirbuild/pull/38)
+- Bump ansi-regex from 4.1.0 to 4.1.1 [`#37`](https://github.com/plumdog/dirbuild/pull/37)
+- Bump minimist from 1.2.5 to 1.2.6 [`#36`](https://github.com/plumdog/dirbuild/pull/36)
+- Bump ajv from 6.12.2 to 6.12.6 [`#35`](https://github.com/plumdog/dirbuild/pull/35)
+- Bump tmpl from 1.0.4 to 1.0.5 [`#34`](https://github.com/plumdog/dirbuild/pull/34)
+- Bump path-parse from 1.0.6 to 1.0.7 [`#33`](https://github.com/plumdog/dirbuild/pull/33)
+- Bump glob-parent from 5.1.1 to 5.1.2 [`#32`](https://github.com/plumdog/dirbuild/pull/32)
+- Bump ws from 7.4.2 to 7.4.6 [`#31`](https://github.com/plumdog/dirbuild/pull/31)
+- Bump lodash from 4.17.19 to 4.17.21 [`#30`](https://github.com/plumdog/dirbuild/pull/30)
+- Bump hosted-git-info from 2.8.8 to 2.8.9 [`#29`](https://github.com/plumdog/dirbuild/pull/29)
+- Bump handlebars from 4.7.6 to 4.7.7 [`#28`](https://github.com/plumdog/dirbuild/pull/28)
+
 #### [0.5.4](https://github.com/plumdog/dirbuild/compare/0.5.3...0.5.4)
 
 > 1 April 2021
@@ -39,7 +60,7 @@
 
 #### [0.3.0](https://github.com/plumdog/dirbuild/compare/0.2.0...0.3.0)
 
-> 21 May 2020
+> 22 May 2020
 
 - Tweak usage of pkg [`#19`](https://github.com/plumdog/dirbuild/pull/19)
 - Complain when applying linting [`#18`](https://github.com/plumdog/dirbuild/pull/18)
